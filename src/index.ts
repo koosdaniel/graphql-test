@@ -30,6 +30,6 @@ const server = new ApolloServer({
     mocks: true
 });
 
-server.listen().then(({url}) => { 
+server.listen().then(({url}: {url: string}) => { 
     console.log(`Server running at ${url}`);
 });
