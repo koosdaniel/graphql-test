@@ -5,6 +5,13 @@ const typeDefs = gql`
         id: ID!
         date: String!
         task: String!
+        conditions: Conditions
+    }
+
+    enum Conditions {
+        BUSY
+        NORMAL
+        BORING
     }
 
     type Query {
