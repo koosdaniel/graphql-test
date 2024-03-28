@@ -5,6 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
+    "prettier": "prettier 'src/**/*.{ts,json}' --write --ignore-unknown .",
+    "prettier:check": "prettier 'src/**/*.{ts,json}' --check --ignore-unknown .",
     "start": "nodemon lib/index.js",
     "start:ts": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +19,7 @@
     "nodemon": "^3.1.0"
   },
   "devDependencies": {
+    "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
