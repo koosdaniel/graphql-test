@@ -1,8 +1,15 @@
 const { ApolloServer, gql } = require('apollo-server');
 
 const typeDefs = gql`
+    type ProgrammingDay {
+        id: ID!
+        date: String!
+        task: String!
+    }
+
     type Query {
-        totalDays: Int!
+        totalDays: Int!,
+        allDays: [ProgrammingDay!]!
     }
 `;
 
