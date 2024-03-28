@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require("apollo-server");
+import { ApolloServer, gql } from "apollo-server";
 
 const typeDefs = gql`
   type ProgrammingDay {
@@ -20,7 +20,7 @@ const typeDefs = gql`
   }
 `;
 
-const resolvers = {};
+// const resolvers = {};
 
 const server = new ApolloServer({
   typeDefs,
@@ -28,6 +28,6 @@ const server = new ApolloServer({
   mocks: true,
 });
 
-server.listen().then(({ url }: { url: string }) => {
+server.listen().then(({ url }) => {
   console.log(`Server running at ${url}`);
 });
