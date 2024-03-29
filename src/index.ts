@@ -1,9 +1,8 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import casual from 'casual';
 import { addMocksToSchema } from '@graphql-tools/mock';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-
+import casual from 'casual';
 import gql from 'graphql-tag';
 
 interface MyContext {
@@ -89,12 +88,12 @@ mutation {
 const resolvers = {};
 
 const mocks = {
-    Date: () =>
-        `${casual.day_of_month}/${casual.month_number}/${casual.integer(2023, 2024)}`,
+    Date: () => `${casual.day_of_month}/${casual.month_number}/${casual.integer(2023, 2024)}`,
     String: () => casual.short_description,
     Query: () => ({
         allDays: () => [...new Array(casual.integer(1, 5))]
         // Works in Apollo v2 only
+
         // allDays: () => new MockList([1, 15])
     })
 };
