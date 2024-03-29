@@ -1,31 +1,31 @@
 {
-  "name": "graphql-test",
-  "version": "1.0.0",
-  "description": "Sample project to learn GraphQL",
-  "main": "lib/index.js",
-  "type": "module",
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint src/**/*.{js,ts,json}",
-    "prettier": "prettier 'src/**/*.{js,ts,json}' --write --ignore-unknown .",
-    "prettier:check": "prettier 'src/**/*.{js,ts,json}' --check --ignore-unknown .",
-    "start": "nodemon lib/index.js",
-    "start:ts": "nodemon src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "apollo-server": "^3.13.0",
-    "casual": "^1.6.2",
-    "graphql": "^16.8.1",
-    "nodemon": "^3.1.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.3",
-    "typescript-eslint": "7.2.0"
-  }
+    "name": "graphql-test",
+    "version": "1.0.0",
+    "description": "Sample project to learn GraphQL",
+    "main": "lib/index.js",
+    "type": "module",
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint src/**/*.{js,ts,json}",
+        "prettier": "prettier 'src/**/*.{js,ts,json}' --write --ignore-unknown .",
+        "prettier:check": "prettier 'src/**/*.{js,ts,json}' --check --ignore-unknown .",
+        "start": "nodemon lib/index.js",
+        "start:ts": "nodemon src/index.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "apollo-server": "^3.13.0",
+        "casual": "^1.6.2",
+        "graphql": "^16.8.1",
+        "nodemon": "^3.1.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.57.0",
+        "prettier": "^3.2.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.3",
+        "typescript-eslint": "7.2.0"
+    }
 }
