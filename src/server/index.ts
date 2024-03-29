@@ -1,9 +1,13 @@
 import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { addMocksToSchema } from '@graphql-tools/mock';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import casual from 'casual';
+import cors from 'cors';
+import express from 'express';
 import gql from 'graphql-tag';
+import http from 'http';
 
 interface MyContext {
     token?: string;
@@ -98,16 +102,26 @@ const mocks = {
     })
 };
 
+const app = express();
+const httpServer = http.createServer(app);
+
 const server = new ApolloServer<MyContext>({
     schema: addMocksToSchema({
         schema: makeExecutableSchema({ typeDefs, resolvers }),
         mocks
-    })
+    }),
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
 });
 
-startStandaloneServer(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
-    listen: { port: 4000 }
-}).then(({ url }) => {
-    console.log(`Server running at ${url}`);
+server.start().then(() => {
+    app.use(
+        '/graphql',
+        cors<cors.CorsRequest>({ origin: ['https://localhost', 'http://localhost'] }),
+        express.json(),
+        expressMiddleware(server)
+    );
+});
+
+httpServer.listen({ port: 4000 }, () => {
+    console.log(`🚀 Server ready at http://localhost:4000/graphql`);
 });
