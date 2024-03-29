@@ -10,7 +10,7 @@
         "prettier": "prettier 'src/**/*.{js,ts,json}' --write --ignore-unknown .",
         "prettier:check": "prettier 'src/**/*.{js,ts,json}' --check --ignore-unknown .",
         "start": "nodemon lib/index.js",
-        "start:ts": "nodemon src/index.ts",
+        "start:ts": "nodemon --esm src/index.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
