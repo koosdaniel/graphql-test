@@ -1,5 +1,14 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
 import casual from 'casual';
+import { addMocksToSchema } from '@graphql-tools/mock';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+
+import gql from 'graphql-tag';
+
+interface MyContext {
+    token?: string;
+}
 
 const typeDefs = gql`
     scalar Date
@@ -52,32 +61,37 @@ const typeDefs = gql`
 `;
 
 /*
+Sample mutations:
+
 mutation {
   addDay(input: {
     date: "22/05/1987"
     task: "Task"
     conditions: BORING
   }) {
-    date
-    id
-    task
+      date
+      id
+      task
   }
 }
 
 mutation {
   removeDay(id: "3") {
-    date
-    id
-    task
+    day {
+      date
+      id
+      task
+    }
   }
 }
  */
 
-// const resolvers = {};
+const resolvers = {};
 
 const mocks = {
-    Date: () => '1/2/2024',
-    String: () => 'Cool Data',
+    Date: () =>
+        `${casual.day_of_month}/${casual.month_number}/${casual.integer(2023, 2024)}`,
+    String: () => casual.short_description,
     Query: () => ({
         allDays: () => [...new Array(casual.integer(1, 5))]
         // Works in Apollo v2 only
@@ -85,12 +99,16 @@ const mocks = {
     })
 };
 
-const server = new ApolloServer({
-    typeDefs,
-    // resolvers,
-    mocks
+const server = new ApolloServer<MyContext>({
+    schema: addMocksToSchema({
+        schema: makeExecutableSchema({ typeDefs, resolvers }),
+        mocks
+    })
 });
 
-server.listen().then(({ url }) => {
+startStandaloneServer(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
+    listen: { port: 4000 }
+}).then(({ url }) => {
     console.log(`Server running at ${url}`);
 });

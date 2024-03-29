@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "tsc",
-        "lint": "eslint src/**/*.{js,ts,json}",
+        "lint": "eslint src/**/*.{ts,json}",
         "prettier": "prettier 'src/**/*.{js,ts,json}' --write --ignore-unknown .",
         "prettier:check": "prettier 'src/**/*.{js,ts,json}' --check --ignore-unknown .",
         "start": "nodemon lib/index.js",
@@ -16,7 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "apollo-server": "^3.13.0",
+        "@apollo/server": "^4.10.2",
         "casual": "^1.6.2",
         "graphql": "^16.8.1",
         "nodemon": "^3.1.0"
